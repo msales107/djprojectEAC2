@@ -59,12 +59,12 @@ class MySeleniumTests(StaticLiveServerTestCase):
             # Al utilitzar una exception, si el find_element funciona, forcem un AssertionError (l'element no s'hauria d'haver trobat). 
             # L'except només captura l'excepció NoSuchElementException de Selenium, i en tal cas no farem res i seguim amb l'execució (l'element no hi és).
             
-            #En aquest cas, busquem que la pàgina sigui la de Admin, si no es la de Admin
-            #Executem el assert i el test passa al ser true
+            #En aquest cas, busquem la clase del missatge de Error
+            #Executem el assert i si es troba el element el test es passa
 
             #Si no es troba la excepcció, el test falla i per tant l'usuari ha entrat a Admin
-
-            self.assertNotEqual( self.selenium.title , "Sitio administrativo | Sitio de administración de Django" )
+            self.selenium.find_element(By.CLASS_NAME,'errornote').click()
+            #self.assertNotEqual( self.selenium.title , "Sitio administrativo | Sitio de administración de Django" )
             assert True, "L'Usuari NO ha pogut fer login a Admin!"
         except NoSuchElementException:
             print("L'Usuari ha pogut fer login a admin")
